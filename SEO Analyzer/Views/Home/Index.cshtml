@@ -1,0 +1,91 @@
+﻿@* ------------------------------------------------------------------
+    * The MIT License (MIT)
+    * Copyright (c) 2021 Asif Bhat
+      ------------------------------------------------------------------ *@
+@model SEO_Analyzer.Models.WordCounterViewModel
+@{ ViewBag.Title = "SEO Analyzer"; }
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 id="title"> SEO Analyzer</h1>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+            </div>
+            <div class="col-sm-3 col-md-3 col-md-offset-3 col-lg-3 col-lg-offset-3">
+                <a id="button-text-analyzer" class="btn btn-primary btn-lg pull-right">Analyze Text</a>
+            </div>
+            <div class="col-sm-3  col-md-3 col-lg-3">
+                <a id="button-url-analyzer" class="btn btn-primary btn-lg">Analyze URL</a>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <div class="row">
+            @using (Html.BeginForm("CountWords", "Analyzer", FormMethod.Post, new { id = "analyzer-filter-form" }))
+            {
+<div class="col-sm-12 col-md-12 col-lg-12 hidden" id="text-box-input-container">
+    <div class="form-group">
+        <label for="internal-source">A word must be minimum of 3 characters in length.</label>
+        @Html.TextAreaFor(model => model.Text, new { @id = "internal-source", @placeholder = "Text...", @style = "width:100%; height:300px;" })
+        <small> Please note that stop words and words containing digits or special characters won't be included in the results.</small>
+    </div>
+</div>
+                <div class="col-sm-12 col-md-12 col-lg-12 hidden" id="url-input-container">
+                    <div class="form-group" id="external-source-options">
+                        <div class="form-group">
+                            <label for="external-source">Enter URL</label>
+                            @Html.TextBoxFor(model => model.URL, new { @id = "external-source", @placeholder = "https://", @style = "width:100%; height:auto;" })
+                        </div>
+                        <div class="form-group">
+                            <label>Options</label>
+                            <ul>
+                                <li>
+                                    <label>
+                                        @Html.CheckBoxFor(m => m.IncludeMetaTags)
+                                        Search Meta Tags
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        @Html.CheckBoxFor(m => m.IncludeExternalSources)
+                                        Include external links
+                                    </label>
+                                </li>
+                            </ul>
+                            <small> Please note that stop words won't be counted in the results.</small>
+                        </div>
+                    </div>
+                </div>
+                                <div class="form-group">
+                                    <input id="submit-button" type="submit" class="btn btn-primary btn-lg hidden" value="Analyze">
+                                </div>
+                                                <div id="preloader" class="hidden">
+                                                    <i class="fa fa-cog fa-spin fa-5x fa-fw" aria-hidden="true"></i>
+                                                    Analyzing ...
+                                                    <br />
+                                                </div>}
+        </div>
+    </div>
+    <div class="jumbotron" id="analisys-results-container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 analyzer-messages">
+                <h2 id="analisys-object-title" class="hidden">Analysis of : <strong><span class="analisys-object"></span></strong></h2>
+                <div id="error-msg" class="alert alert-danger hidden analyzer-messages">
+                </div>
+            </div>
+            <br />
+            <div>
+                <div id="jsGrid-analyzer-results-keywords" class="jsgrid table-results-container"></div>
+            </div>
+            <div>
+                <div id="jsGrid-analyzer-results-keywords-meta" class="jsgrid table-results-container"></div>
+            </div>
+            <div>
+                <div id="jsGrid-analyzer-results-external-links" class="jsgrid table-results-container"></div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@* ------------------------------------------------------------------
+    * The MIT License (MIT)
+    * Copyright (c) 2021 Asif Bhat
+      ------------------------------------------------------------------ *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="SEO Analyzer">
+    <title>@ViewBag.Title - SEO Analyzer</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/themes/base/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/themes/base/jsgrid-theme.css" />
+    <link rel="stylesheet" href="~/css/themes/base/jsgrid.css" />
+    <link rel="stylesheet" href="~/css/seo-app-custom.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="body">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-right">
+                <p>
+                    &copy; @DateTime.Now.Year - SEO Analyzer
+                    <br />
+                    <strong>By: Asif Bhat</strong>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/custom/analyzer-custom-scripts.js"></script>
+    <script src="~/js/jsgrid.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
